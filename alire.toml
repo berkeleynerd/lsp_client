@@ -1,0 +1,46 @@
+name = "lsp_client"
+description = "GNAT Studio LSP client core (protocol-only, headless)"
+version = "0.1.0-dev"
+
+authors = ["AdaCore", "Rebecca"]
+maintainers = ["rebecca@berkeleynerd.com"]
+maintainers-logins = ["berkeleynerd"]
+
+licenses = "GPL-3.0-or-later"
+website = "https://github.com/berkeleynerd/gps_lsp_client_core"
+tags = ["ada", "gnatstudio", "lsp", "language-server"]
+
+# NOTE: In this monorepo, we reference the root GPR. In a split repo,
+# set project-files to ["lsp_client.gpr"] at the crate root.
+project-files = [
+  "lsp_client_lib.gpr",
+]
+
+[[depends-on]]
+language = "~0.1.0"
+
+[[depends-on]]
+common = "~0.1.0"
+
+[[depends-on]]
+shared = "~0.1.0"
+
+[[depends-on]]
+ada_language_server = "~25.0"
+
+# Local development pins to sibling crates
+[[pins]]
+language = { path = "../language" }
+
+[[pins]]
+shared = { path = "../shared" }
+
+[[pins]]
+common = { path = "../common" }
+
+[gpr-externals]
+BUILD = ["Debug", "Production", "AddressSanitizer", "Coverage"]
+LIBRARY_TYPE = ["static", "relocatable", "static-pic"]
+
+[gpr-set-externals]
+LIBRARY_TYPE = "static"

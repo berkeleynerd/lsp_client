@@ -1,0 +1,38 @@
+V "GNAT Lib v15"
+A -O0
+A -Wtrampolines
+A -gnatA
+A -g
+A -gnatX
+A -gnata
+A -gnatVa
+A -gnatQ
+A -gnatyg
+A -gnatyO
+A -gnatwa
+A -gnatwC
+A -gnatwJ
+A -gnatwe
+A -gnateE
+A -mmacosx-version-min=26.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U gps.lsp_client%s	gps-lsp_client.ads	bbfbba71 NE OO PU PK IU
+W gps%s			gps.ads			gps.ali
+
+D gps.ads		20251111041755 7fe0a484 gps%s
+D gps-lsp_client.ads	20251111035537 c41b1ef5 gps.lsp_client%s
+D system.ads		20250419085653 70765b54 system%s
+G a e
+X 1 gps.ads
+1K9*GPS 3e8 2|18r9 22r5
+X 2 gps-lsp_client.ads
+18K13*LSP_Client 1|1k9 2|22l9 22e19
+

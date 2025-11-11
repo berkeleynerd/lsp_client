@@ -1,0 +1,232 @@
+------------------------------------------------------------------------------
+--                               GNAT Studio                                --
+--                                                                          --
+--                        Copyright (C) 2025, AdaCore                       --
+--                                                                          --
+-- This is free software;  you can redistribute it  and/or modify it  under --
+-- terms of the  GNU General Public License as published  by the Free Soft- --
+-- ware  Foundation;  either version 3,  or (at your option) any later ver- --
+-- sion.  This software is distributed in the hope  that it will be useful, --
+-- but WITHOUT ANY WARRANTY;  without even the implied warranty of MERCHAN- --
+-- TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public --
+-- License for  more details.  You should have  received  a copy of the GNU --
+-- General  Public  License  distributed  with  this  software;   see  file --
+-- COPYING3.  If not, go to http://www.gnu.org/licenses for a complete copy --
+-- of the license.                                                          --
+------------------------------------------------------------------------------
+
+--  GPS.LSP_Client.Callbacks - Decouple LSP client from GPS.Kernel
+--
+--  Purpose: Abstract interface for LSP client to interact with IDE/TUI
+--  Allows: Protocol layer to work without GPS.Kernel dependency
+--
+--  Usage:
+--    type My_LSP_Handler is new LSP_Callback_Interface with record
+--       ... application-specific state ...
+--    end record;
+--
+--    overriding procedure Trace (Self : My_LSP_Handler; ...) is ...
+--    -- Implement other callbacks
+--
+--  The LSP client will use this interface instead of directly calling
+--  GPS.Kernel methods.
+
+with GNATCOLL.VFS;
+with Language;
+with LSP.Messages;
+with Spawn.Environments;
+limited with GPS.LSP_Client.Language_Servers;
+
+package GPS.LSP_Client.Callbacks is
+
+   pragma Style_Checks (Off);
+
+   type Trace_Mode is (Trace_Error, Trace_Warning, Trace_Info, Trace_Debug);
+
+   type LSP_Callback_Interface is limited interface;
+   type LSP_Callback_Access is access all LSP_Callback_Interface'Class;
+
+
+   ------------------
+   -- Tracing/Logging
+   ------------------
+
+   
+   procedure Trace
+     (Self    : LSP_Callback_Interface;
+      Message : String;
+      Mode    : Trace_Mode := Trace_Info) is abstract;
+   --  Log a message to the application's trace system
+
+   -------------------
+   -- Preferences
+   -------------------
+
+   
+   function Get_Tab_Width
+     (Self : LSP_Callback_Interface;
+      File : GNATCOLL.VFS.Virtual_File) return Natural is abstract;
+   --  Return tab width for formatting (e.g., 3 for Ada)
+
+   function Get_Insert_Spaces
+     (Self : LSP_Callback_Interface;
+      File : GNATCOLL.VFS.Virtual_File) return Boolean is abstract;
+   --  Return whether to insert spaces instead of tabs
+
+   ---------------------
+   -- Project Context
+   ---------------------
+
+   
+   function Get_Project_File
+     (Self : LSP_Callback_Interface)
+      return GNATCOLL.VFS.Virtual_File is abstract;
+   --  Return the current project file (.gpr)
+
+   function Get_Project_Path
+     (Self : LSP_Callback_Interface)
+      return GNATCOLL.VFS.Virtual_File is abstract;
+   --  Return the project root directory
+
+   function Get_Language_Server
+     (Self : LSP_Callback_Interface;
+      Lang : not null Language.Language_Access)
+      return GPS.LSP_Client.Language_Servers.Language_Server_Access
+      is abstract;
+   --  Retrieve the language server associated with the given language.
+
+   ----------------------
+   -- Document Lifecycle
+   ----------------------
+
+   
+   function Build_Did_Open_Params
+     (Self : LSP_Callback_Interface;
+      File : GNATCOLL.VFS.Virtual_File)
+      return LSP.Messages.DidOpenTextDocumentParams is abstract;
+   --  Build the DidOpen parameters for a file that is about to be published
+   --  to the language server.
+
+   procedure On_Document_Closed
+     (Self : LSP_Callback_Interface;
+      File : GNATCOLL.VFS.Virtual_File) is abstract;
+   --  Notify the host that a document finished its LSP session.
+
+   -------------------------
+   -- Workspace Operations --
+   -------------------------
+
+   procedure Apply_Workspace_Edit
+     (Self  : LSP_Callback_Interface;
+      Edit  : LSP.Messages.WorkspaceEdit;
+      Title : String;
+      Error : out Boolean) is abstract;
+   --  Apply a workspace edit requested by the language server. Error must be
+   --  set to True when the edit could not be applied.
+
+   ------------------
+   -- Environment  --
+   ------------------
+
+   function Get_Server_Environment
+     (Self : LSP_Callback_Interface)
+      return Spawn.Environments.Process_Environment is abstract;
+   --  Return the environment that should be used when spawning the server.
+
+   ------------------------------
+   -- Null Implementation (for testing and minimal use)
+   ------------------------------
+
+
+   ---------------------
+   -- Event Loop / Timers
+   ---------------------
+
+   type Timer_Id is new Natural;
+   No_Timer : constant Timer_Id := 0;
+   --  Abstract timer identifier (replaces Glib.Main.G_Source_Id)
+
+   type Timer_Callback is access procedure;
+   --  Callback procedure for timer expiration
+
+   procedure Schedule_Timer
+     (Self     : LSP_Callback_Interface;
+      Interval : Natural;
+      Callback : Timer_Callback;
+      Timer    : out Timer_Id) is abstract;
+   --  Schedule a timer to call Callback after Interval milliseconds
+   --  Returns Timer identifier for later cancellation
+
+   procedure Cancel_Timer
+     (Self  : LSP_Callback_Interface;
+      Timer : in out Timer_Id) is abstract;
+   --  Cancel a previously scheduled timer
+
+   ------------------------------
+   -- Null Implementation (for testing and minimal use)
+   ------------------------------
+
+   type Null_Callback is new LSP_Callback_Interface with null record;
+   --  Minimal implementation that does nothing
+   --  Useful for testing or when IDE features not needed
+
+   overriding procedure Trace
+     (Self    : Null_Callback;
+      Message : String;
+      Mode    : Trace_Mode := Trace_Info) is null;
+
+   overriding function Get_Tab_Width
+     (Self : Null_Callback;
+      File : GNATCOLL.VFS.Virtual_File) return Natural is (8);
+
+   overriding function Get_Insert_Spaces
+     (Self : Null_Callback;
+      File : GNATCOLL.VFS.Virtual_File) return Boolean is (True);
+
+   overriding function Get_Project_File
+     (Self : Null_Callback)
+      return GNATCOLL.VFS.Virtual_File is (GNATCOLL.VFS.No_File);
+
+   overriding function Get_Project_Path
+     (Self : Null_Callback)
+      return GNATCOLL.VFS.Virtual_File is (GNATCOLL.VFS.No_File);
+
+   overriding function Get_Language_Server
+     (Self : Null_Callback;
+      Lang : not null Language.Language_Access)
+      return GPS.LSP_Client.Language_Servers.Language_Server_Access;
+
+   overriding function Build_Did_Open_Params
+     (Self : Null_Callback;
+      File : GNATCOLL.VFS.Virtual_File)
+      return LSP.Messages.DidOpenTextDocumentParams;
+
+   overriding procedure On_Document_Closed
+     (Self : Null_Callback;
+      File : GNATCOLL.VFS.Virtual_File);
+
+   overriding procedure Apply_Workspace_Edit
+     (Self  : Null_Callback;
+      Edit  : LSP.Messages.WorkspaceEdit;
+      Title : String;
+      Error : out Boolean);
+
+   overriding function Get_Server_Environment
+     (Self : Null_Callback)
+      return Spawn.Environments.Process_Environment;
+
+   overriding procedure Schedule_Timer
+     (Self     : Null_Callback;
+      Interval : Natural;
+      Callback : Timer_Callback;
+      Timer    : out Timer_Id);
+   --  No-op implementation: timers disabled
+
+   overriding procedure Cancel_Timer
+     (Self  : Null_Callback;
+      Timer : in out Timer_Id);
+   --  No-op implementation
+
+   pragma Style_Checks (On);
+
+end GPS.LSP_Client.Callbacks;

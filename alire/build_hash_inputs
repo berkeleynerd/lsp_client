@@ -1,0 +1,7 @@
+dependency:ada_language_server=25.0.0=141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3
+external:BUILD=default
+external:LIBRARY_TYPE=static
+external:LSP_CLIENT_LIBRARY_TYPE=default
+profile:lsp_client=RELEASE
+switches:lsp_client=-O3,-fdata-sections,-ffunction-sections,-gnatW8,-gnatn
+version:gnat_native=15.1.2

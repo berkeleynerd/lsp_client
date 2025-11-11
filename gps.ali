@@ -1,0 +1,21 @@
+V "GNAT Lib v15"
+A -gnatA
+A -gnat2022
+A -mmacosx-version-min=26.0
+A -mcpu=apple-m1
+A -mlittle-endian
+A -mabi=lp64
+A -fPIC
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U gps%s			gps.ads			7fe0a484 NE OO PU PK IU
+
+D gps.ads		20251111041755 7fe0a484 gps%s
+D system.ads		20250419085653 70765b54 system%s
+G a e
+X 1 gps.ads
+1K9*GPS 3l5 3e8
+
