@@ -14,7 +14,11 @@ tags = ["ada", "gnatstudio", "lsp", "language-server"]
 # set project-files to ["lsp_client.gpr"] at the crate root.
 project-files = [
   "lsp_client_lib.gpr",
+  "tests/tests.gpr",
+  "tests/integration_tests.gpr",
 ]
+
+executables = ["tests", "integration_tests_main"]
 
 [[depends-on]]
 language = "~0.1.0"
@@ -27,6 +31,9 @@ shared = "~0.1.0"
 
 [[depends-on]]
 ada_language_server = "~25.0"
+
+[[depends-on]]
+aunit = "~25.0.0"
 
 # Local development pins to sibling crates
 [[pins]]

@@ -1,7 +1,7 @@
 dependency:ada_language_server=25.0.0=141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3
+dependency:aunit=25.0.0=a08b5478e5d4f6dffbe7123e401b008ba35115b085d3c0817ded26ddb71e7e8b
 external:BUILD=default
 external:LIBRARY_TYPE=static
 external:LSP_CLIENT_LIBRARY_TYPE=default
-profile:lsp_client=RELEASE
-switches:lsp_client=-O3,-fdata-sections,-ffunction-sections,-gnatW8,-gnatn
-version:gnat_native=15.1.2
+profile:lsp_client=DEVELOPMENT
+switches:lsp_client=-Og,-fdata-sections,-ffunction-sections,-g,-gnatVa,-gnatW8,-gnatw.X,-gnatwa,-gnaty-d,-gnaty3,-gnatyA,-gnatyB,-gnatyI,-gnatyO,-gnatyS,-gnatya,-gnatyb,-gnatyc,-gnatye,-gnatyf,-gnatyh,-gnatyi,-gnatyk,-gnatyl,-gnatym,-gnatyn,-gnatyp,-gnatyr,-gnatyt,-gnatyu,-gnatyx

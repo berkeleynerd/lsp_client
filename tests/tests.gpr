@@ -1,0 +1,14 @@
+with "../lsp_client_lib.gpr";
+with "aunit";
+
+project Tests is
+
+   for Source_Dirs use (".");
+   for Object_Dir use "obj";
+   for Main use ("tests.adb");
+
+   package Compiler is
+      for Switches ("Ada") use ("-gnat2022");
+   end Compiler;
+
+end Tests;
