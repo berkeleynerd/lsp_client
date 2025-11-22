@@ -106,6 +106,12 @@ package GPS.LSP_Clients is
    --  Use given command line to start LSP server.
    --  When set, Initialization_Options will be sent to the server via the
    --  LSP 'initialize' request.
+   --
+   --  Note: process control is asynchronous and built on Spawn.Processes.
+   --  LSP_Client does not call Spawn.Processes.Monitor_Loop itself: the
+   --  embedding application must drive Monitor_Loop (or an equivalent
+   --  event loop) so that fork/exec, I/O callbacks and lifecycle events
+   --  are actually processed.
 
    procedure Stop
      (Self               : in out LSP_Client'Class;

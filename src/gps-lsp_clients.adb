@@ -16,6 +16,7 @@
 ------------------------------------------------------------------------------
 
 with Ada.Characters.Handling;
+with Ada.Characters.Latin_1;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Interfaces;
 
@@ -441,6 +442,17 @@ package body GPS.LSP_Clients is
 
       if not Self.Exiting then
          Me_Errors.Trace ("On_Error:" & Error);
+
+         --  When an errors file is configured, also persist the spawn
+         --  or runtime error message there so integration tests and
+         --  headless clients can inspect failures without relying on
+         --  GNATCOLL.Traces configuration.
+         if Self.Errors_Writable_File /= Invalid_File then
+            GNATCOLL.VFS.Write
+              (Self.Errors_Writable_File,
+               Error & Ada.Characters.Latin_1.LF);
+         end if;
+
          Self.Is_Ready := False;
          Self.Reject_All_Requests;
       end if;
@@ -943,9 +955,16 @@ package body GPS.LSP_Clients is
      (Self       : in out LSP_Client;
       Occurrence : Ada.Exceptions.Exception_Occurrence)
    is
-      pragma Unreferenced (Self);
+      use Ada.Exceptions;
    begin
       Trace (Me, Occurrence);
+
+       if Self.Errors_Writable_File /= Invalid_File then
+         GNATCOLL.VFS.Write
+           (Self.Errors_Writable_File,
+            Exception_Information (Occurrence)
+            & Ada.Characters.Latin_1.LF);
+       end if;
    end On_Exception;
 
    ----------------

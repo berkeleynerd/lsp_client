@@ -21,4 +21,8 @@ Runtime note
 - This is a library crate. Applications using it should ensure the
   ada_language_server binary is available on PATH when launching an LSP
   server process.
-
+- Process spawning is asynchronous: the library does not call
+  Spawn.Processes.Monitor_Loop itself. Hosts must integrate
+  Monitor_Loop (or an equivalent driver) into their event loop so that
+  child processes are actually started and their I/O and lifecycle
+  events are delivered.
