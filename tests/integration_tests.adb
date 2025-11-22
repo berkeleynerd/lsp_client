@@ -196,7 +196,18 @@ package body Integration_Tests is
       GPS.LSP_Client.Language_Servers.Real.Shutdown
         (GPS.LSP_Client.Language_Servers.Real.Real_Language_Server'Class
            (Server.all),
-         Reject_Immediately => True);
+         Reject_Immediately => False);
+
+      --  Give Spawn's monitor loop a chance to observe server exit and
+      --  transition underlying processes to Not_Running before finalization.
+      declare
+         use Ada.Real_Time;
+         Shutdown_Deadline : constant Time := Clock + Milliseconds (2_000);
+      begin
+         while Clock < Shutdown_Deadline loop
+            Spawn.Processes.Monitor_Loop (0.05);
+         end loop;
+      end;
    end ALS_Handshake_Only;
 
    procedure ALS_Diagnostics_On_Typo
@@ -399,7 +410,18 @@ package body Integration_Tests is
       GPS.LSP_Client.Language_Servers.Real.Shutdown
         (GPS.LSP_Client.Language_Servers.Real.Real_Language_Server'Class
            (Server.all),
-         Reject_Immediately => True);
+         Reject_Immediately => False);
+
+      --  Give Spawn's monitor loop a chance to observe server exit and
+      --  transition underlying processes to Not_Running before finalization.
+      declare
+         use Ada.Real_Time;
+         Shutdown_Deadline : constant Time := Clock + Milliseconds (2_000);
+      begin
+         while Clock < Shutdown_Deadline loop
+            Spawn.Processes.Monitor_Loop (0.05);
+         end loop;
+      end;
    end ALS_Diagnostics_On_Typo;
 
 end Integration_Tests;
