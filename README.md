@@ -26,3 +26,10 @@ Runtime note
   Monitor_Loop (or an equivalent driver) into their event loop so that
   child processes are actually started and their I/O and lifecycle
   events are delivered.
+
+Diagnostics
+- Set the `LSP_CLIENT_TRACE` environment variable to capture detailed client
+  traces. When the value is `1`/`true` the library writes
+  `lsp_client-YYYYMMDD-HHMMSS.log` into the current directory; when the value is
+  a directory or file path, logs are written there instead. Leaving the variable
+  unset keeps tracing disabled with zero overhead.
