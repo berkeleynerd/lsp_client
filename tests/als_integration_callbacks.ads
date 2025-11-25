@@ -2,7 +2,6 @@ with GNATCOLL.VFS;
 
 with GPS.LSP_Client.Callbacks;
 with GPS.LSP_Client.Language_Servers;
-with GPS.LSP_Client.Language_Servers.Interceptors;
 
 with LSP.Client_Notification_Receivers;
 with LSP.Messages;
@@ -32,16 +31,6 @@ package ALS_Integration_Callbacks is
      (Self : Integration_Callbacks;
       File : GNATCOLL.VFS.Virtual_File)
       return LSP.Messages.DidOpenTextDocumentParams;
-
-   type Test_Listener is
-     new GPS.LSP_Client.Language_Servers.Interceptors.Server_Listener
-   with record
-      Ready : Boolean := False;
-   end record;
-
-   overriding procedure On_Server_Started
-     (Self   : in out Test_Listener;
-      Server : not null GPS.LSP_Client.Language_Servers.Language_Server_Access);
 
    type Diagnostics_Collector is
      new LSP.Client_Notification_Receivers.Client_Notification_Receiver

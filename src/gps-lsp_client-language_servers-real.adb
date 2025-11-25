@@ -18,13 +18,37 @@
 with GNATCOLL.JSON;
 with GNATCOLL.VFS;      use GNATCOLL.VFS;
 
-with GPS.LSP_Client.Requests.Internals;
-with GPS.LSP_Client.Language_Servers.Interceptors;
+with Ada.Tags;
+
+with GPS.LSP_Client.Diagnostics;
 
 package body GPS.LSP_Client.Language_Servers.Real is
+   use type GPS.LSP_Client.Requests.Request_Access;
+
+   function Request_Label
+     (Request : GPS.LSP_Client.Requests.Request_Access) return String;
+   --  Return a short label describing the request for diagnostics.
+
+   ---------------
+   -- Initialize --
+   ---------------
 
    procedure Initialize (Self : in out Real_Language_Server'Class);
    --  Initialize language server object. Doesn't start server.
+
+   -------------------
+   -- Request_Label --
+   -------------------
+
+   function Request_Label
+     (Request : GPS.LSP_Client.Requests.Request_Access) return String is
+   begin
+      if Request = null then
+         return "<null>";
+      else
+         return Ada.Tags.Expanded_Name (Request.all'Tag);
+      end if;
+   end Request_Label;
 
    ------------
    -- Cancel --
@@ -66,24 +90,18 @@ package body GPS.LSP_Client.Language_Servers.Real is
    ------------
 
    function Create
-     (Callbacks           : not null access
+     (Callbacks     : not null access
         GPS.LSP_Client.Callbacks.LSP_Callback_Interface'Class;
-      Configuration       : not null access
+      Configuration : not null access
         GPS.LSP_Client.Configurations.Server_Configuration'Class;
-      Server_Interceptor  : not null access
-        Interceptors.Server_Listener'Class;
-      Request_Interceptor : not null access
-        Interceptors.Request_Listener'Class;
-      Language            : not null access Language_Root'Class)
+      Language      : not null access Language_Root'Class)
       return not null Language_Server_Access is
    begin
       return Result : constant not null Language_Server_Access :=
         new Real_Language_Server
-          (Callbacks           => Callbacks,
-           Configuration       => Configuration,
-           Server_Interceptor  => Server_Interceptor,
-           Request_Interceptor => Request_Interceptor,
-           Language            => Language)
+          (Callbacks     => Callbacks,
+           Configuration => Configuration,
+           Language      => Language)
       do
          Real_Language_Server'Class (Result.all).Initialize;
       end return;
@@ -129,11 +147,9 @@ package body GPS.LSP_Client.Language_Servers.Real is
      (Self    : in out Real_Language_Server;
       Request : GPS.LSP_Client.Requests.Request_Access) is
    begin
-      if Self.Request_Interceptor /= null then
-         Self.Request_Interceptor.On_Receive_Reply
-           (GPS.LSP_Client.Requests.Internals.Create_Reference
-              (Request, Self'Unchecked_Access));
-      end if;
+      pragma Unreferenced (Self);
+      GPS.LSP_Client.Diagnostics.Log
+        ("receive-reply", Request_Label (Request));
    end On_Receive_Reply;
 
    -----------------------
@@ -144,11 +160,9 @@ package body GPS.LSP_Client.Language_Servers.Real is
      (Self    : in out Real_Language_Server;
       Request : GPS.LSP_Client.Requests.Request_Access) is
    begin
-      if Self.Request_Interceptor /= null then
-         Self.Request_Interceptor.On_Reject_Request
-           (GPS.LSP_Client.Requests.Internals.Create_Reference
-              (Request, Self'Unchecked_Access));
-      end if;
+      pragma Unreferenced (Self);
+      GPS.LSP_Client.Diagnostics.Log
+        ("reject-request", Request_Label (Request));
    end On_Reject_Request;
 
    ---------------------------
@@ -161,8 +175,10 @@ package body GPS.LSP_Client.Language_Servers.Real is
       Method : Ada.Strings.Unbounded.Unbounded_String) is
    begin
       if not Self.Destroyed then
-         Self.Server_Interceptor.On_Response_Processed
-           (Self'Unchecked_Access, Data, Method);
+         GPS.LSP_Client.Diagnostics.Log
+           ("response-processed",
+            "method=" & Ada.Strings.Unbounded.To_String (Method)
+            & ";payload=" & Ada.Strings.Unbounded.To_String (Data));
       end if;
    end On_Response_Processed;
 
@@ -175,8 +191,9 @@ package body GPS.LSP_Client.Language_Servers.Real is
       Data : Ada.Strings.Unbounded.Unbounded_String) is
    begin
       if not Self.Destroyed then
-         Self.Server_Interceptor.On_Response_Sent
-           (Self'Unchecked_Access, Data);
+         GPS.LSP_Client.Diagnostics.Log
+           ("response-sent",
+            Ada.Strings.Unbounded.To_String (Data));
       end if;
    end On_Response_Sent;
 
@@ -188,11 +205,9 @@ package body GPS.LSP_Client.Language_Servers.Real is
      (Self    : in out Real_Language_Server;
       Request : GPS.LSP_Client.Requests.Request_Access) is
    begin
-      if Self.Request_Interceptor /= null then
-         Self.Request_Interceptor.On_Send_Cancel
-           (GPS.LSP_Client.Requests.Internals.Create_Reference
-              (Request, Self'Unchecked_Access));
-      end if;
+      pragma Unreferenced (Self);
+      GPS.LSP_Client.Diagnostics.Log
+        ("send-cancel", Request_Label (Request));
    end On_Send_Cancel;
 
    ---------------------
@@ -203,11 +218,9 @@ package body GPS.LSP_Client.Language_Servers.Real is
      (Self    : in out Real_Language_Server;
       Request : GPS.LSP_Client.Requests.Request_Access) is
    begin
-      if Self.Request_Interceptor /= null then
-         Self.Request_Interceptor.On_Send_Request
-           (GPS.LSP_Client.Requests.Internals.Create_Reference
-              (Request, Self'Unchecked_Access));
-      end if;
+      pragma Unreferenced (Self);
+      GPS.LSP_Client.Diagnostics.Log
+        ("send-request", Request_Label (Request));
    end On_Send_Request;
 
    -----------------------
@@ -217,7 +230,8 @@ package body GPS.LSP_Client.Language_Servers.Real is
    overriding procedure On_Server_Started
      (Self : in out Real_Language_Server) is
    begin
-      Self.Server_Interceptor.On_Server_Started (Self'Unchecked_Access);
+      pragma Unreferenced (Self);
+      GPS.LSP_Client.Diagnostics.Log ("server-started");
    end On_Server_Started;
 
    -----------------------
@@ -227,7 +241,8 @@ package body GPS.LSP_Client.Language_Servers.Real is
    overriding procedure On_Server_Stopped
      (Self : in out Real_Language_Server) is
    begin
-      Self.Server_Interceptor.On_Server_Stopped (Self'Unchecked_Access);
+      pragma Unreferenced (Self);
+      GPS.LSP_Client.Diagnostics.Log ("server-stopped");
    end On_Server_Stopped;
 
    -----------
@@ -243,6 +258,9 @@ package body GPS.LSP_Client.Language_Servers.Real is
          Initialization_Options =>
            (True,
             (Self.Configuration.Configuration_Settings with null record)));
+      GPS.LSP_Client.Diagnostics.Log
+        ("start",
+         +Self.Configuration.Server_Program.Full_Name.all);
    end Start;
 
    --------------
@@ -255,6 +273,8 @@ package body GPS.LSP_Client.Language_Servers.Real is
    begin
       Self.Destroyed := Reject_Immediately;
       Self.Client.Stop (Reject_Immediately);
+      GPS.LSP_Client.Diagnostics.Log
+        ("shutdown", (if Reject_Immediately then "immediate" else "graceful"));
    end Shutdown;
 
    -------------
@@ -268,6 +288,7 @@ package body GPS.LSP_Client.Language_Servers.Real is
            (True,
             (Self.Configuration.Configuration_Settings with
              null record)));
+      GPS.LSP_Client.Diagnostics.Log ("restart");
    end Restart;
 
    -------------------------

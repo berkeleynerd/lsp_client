@@ -16,7 +16,6 @@ with GPS.LSP_Client.Utilities;
 with GPS.LSP_Client.Configurations.ALS;
 with GPS.LSP_Client.Language_Servers;
 with GPS.LSP_Client.Language_Servers.Real;
-with GPS.LSP_Client.Language_Servers.Interceptors;
 
 with ALS_Integration_Callbacks;
 
@@ -93,13 +92,6 @@ package body Integration_Tests is
       File      : Ada.Text_IO.File_Type;
       Callbacks : aliased ALS_Integration_Callbacks.Integration_Callbacks;
 
-      type Null_Request_Listener is
-        new GPS.LSP_Client.Language_Servers.Interceptors.Request_Listener
-      with null record;
-
-      Server_Listener  : aliased ALS_Integration_Callbacks.Test_Listener;
-      Request_Listener : aliased Null_Request_Listener;
-
       Config : aliased GPS.LSP_Client.Configurations.ALS.ALS_Configuration
         (Callbacks => Callbacks'Access);
 
@@ -132,8 +124,6 @@ package body Integration_Tests is
       Callbacks.Buffer :=
         VSS.Strings.Conversions.To_Virtual_String (Baseline_Text);
 
-      Server_Listener.Ready := False;
-
       --  Prepare an ALS traces configuration local to this workspace so that
       --  ALS.IN/ALS.OUT can be inspected if needed without touching global
       --  configuration.
@@ -163,11 +153,9 @@ package body Integration_Tests is
       --  Create and initialize server wrapper
       Server :=
         GPS.LSP_Client.Language_Servers.Real.Create
-          (Callbacks           => Callbacks'Access,
-           Configuration       => Config'Access,
-           Server_Interceptor  => Server_Listener'Access,
-           Request_Interceptor => Request_Listener'Access,
-           Language            => Language.Ada.Ada_Lang);
+          (Callbacks     => Callbacks'Access,
+           Configuration => Config'Access,
+           Language      => Language.Ada.Ada_Lang);
 
       Client := Server.Get_Client;
 
@@ -184,12 +172,14 @@ package body Integration_Tests is
       --  Wait for server to become ready
       Deadline := Clock + Milliseconds (10_000);
 
-      while not Server_Listener.Ready and then Clock < Deadline loop
+      while not GPS.LSP_Clients.Is_Ready (Client.all)
+        and then Clock < Deadline
+      loop
          Spawn.Processes.Monitor_Loop (0.05);
       end loop;
 
       AUnit.Assertions.Assert
-        (Server_Listener.Ready,
+        (GPS.LSP_Clients.Is_Ready (Client.all),
          "ada_language_server did not become ready within 10 seconds");
 
       --  Stop server (best-effort)
@@ -235,13 +225,6 @@ package body Integration_Tests is
       File      : Ada.Text_IO.File_Type;
       Callbacks : aliased ALS_Integration_Callbacks.Integration_Callbacks;
 
-      type Null_Request_Listener is
-        new GPS.LSP_Client.Language_Servers.Interceptors.Request_Listener
-      with null record;
-
-      Server_Listener  : aliased ALS_Integration_Callbacks.Test_Listener;
-      Request_Listener : aliased Null_Request_Listener;
-
       Config : aliased GPS.LSP_Client.Configurations.ALS.ALS_Configuration
         (Callbacks => Callbacks'Access);
 
@@ -277,7 +260,6 @@ package body Integration_Tests is
       Callbacks.Buffer :=
         VSS.Strings.Conversions.To_Virtual_String (Baseline_Text);
 
-      Server_Listener.Ready := False;
       Global_Collector.Has_Diagnostics := False;
 
       --  Prepare an ALS traces configuration local to this workspace so that
@@ -309,11 +291,9 @@ package body Integration_Tests is
       --  Create and initialize server wrapper
       Server :=
         GPS.LSP_Client.Language_Servers.Real.Create
-          (Callbacks           => Callbacks'Access,
-           Configuration       => Config'Access,
-           Server_Interceptor  => Server_Listener'Access,
-           Request_Interceptor => Request_Listener'Access,
-           Language            => Language.Ada.Ada_Lang);
+          (Callbacks     => Callbacks'Access,
+           Configuration => Config'Access,
+           Language      => Language.Ada.Ada_Lang);
 
       Client := Server.Get_Client;
 
@@ -333,12 +313,14 @@ package body Integration_Tests is
       --  Wait for server to become ready
       Deadline := Clock + Milliseconds (10_000);
 
-      while not Server_Listener.Ready and then Clock < Deadline loop
+      while not GPS.LSP_Clients.Is_Ready (Client.all)
+        and then Clock < Deadline
+      loop
          Spawn.Processes.Monitor_Loop (0.05);
       end loop;
 
       AUnit.Assertions.Assert
-        (Server_Listener.Ready,
+        (GPS.LSP_Clients.Is_Ready (Client.all),
          "ada_language_server did not become ready within 10 seconds");
 
       --  Send DidOpen for baseline buffer
