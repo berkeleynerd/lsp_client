@@ -1,0 +1,183 @@
+[GENERATED OBJECT FILE]
+b__integration_tests_main.o
+[PROJECT FILES]
+/Users/rebecca/src/github.com/agentc1/lsp_client/tests/integration_tests.gpr
+20251120174515 b80efca9263e5a5bec34fd7871b3c6f3
+/Users/rebecca/.local/share/alire/builds/aunit_25.0.0_3882c581/a08b5478e5d4f6dffbe7123e401b008ba35115b085d3c0817ded26ddb71e7e8b/lib/gnat/aunit_shared.gpr
+20251120164052 a303e481ef034b96800ef21fd3053261
+/Users/rebecca/.local/share/alire/builds/aunit_25.0.0_3882c581/a08b5478e5d4f6dffbe7123e401b008ba35115b085d3c0817ded26ddb71e7e8b/lib/gnat/aunit.gpr
+20251120164052 62a905628ec0e9973e0752ef161a7574
+/Users/rebecca/src/github.com/agentc1/shared/shared.gpr
+20251118122427 bef0f716116f7c305a482cbac9299b55
+/Users/rebecca/.local/share/alire/builds/gnatcoll_iconv_25.0.0_0848cc59/592859e7f5155ddc717fe307df02691e79057fb1a3ac53fb26216daf336094b5/iconv/gnatcoll_iconv.gpr
+20251118122519 8eee00a6c729ca555bdfea000518fc48
+/Users/rebecca/.local/share/alire/builds/gnatcoll_xref_25.0.0_99777a00/91ea7344adc1a232489e04ae954b8acd7e025cdc952dbbb7bd253bde5d3c7482/xref/gnatcoll_xref_conf.gpr
+20251118122521 fa210a1b436168ddafd7f11c5a18e4ed
+/Users/rebecca/.local/share/alire/builds/gnatcoll_xref_25.0.0_99777a00/91ea7344adc1a232489e04ae954b8acd7e025cdc952dbbb7bd253bde5d3c7482/xref/gnatcoll_xref.gpr
+20251118122521 1dc3cde4528a8bcfa5e59a851c2a587b
+/Users/rebecca/.local/share/alire/builds/gnatcoll_sql_25.0.0_99777a00/73fcab9ca8d322aa6fe6ca45d81faecda1258f40c6861bf9c8e6e185087fda71/sql/gnatcoll_sql_conf.gpr
+20251118122519 d522ee7c43e369b93b539e61a7f4ba58
+/Users/rebecca/.local/share/alire/builds/gnatcoll_sql_25.0.0_99777a00/73fcab9ca8d322aa6fe6ca45d81faecda1258f40c6861bf9c8e6e185087fda71/sql/gnatcoll_sql.gpr
+20251118122519 2b703f9dbdd45ce66254705d2818c76a
+/Users/rebecca/.local/share/alire/builds/gnatcoll_sqlite_25.0.0_99777a00/5650091a3a56e65ff169ebbfc044d5f0188a882c8b861430da8009eef47a7092/sqlite/gnatcoll_sqlite_conf.gpr
+20251118122519 aaaa0d7a2fc83631a4400153be6259c6
+/Users/rebecca/.local/share/alire/builds/gnatcoll_sqlite_25.0.0_99777a00/5650091a3a56e65ff169ebbfc044d5f0188a882c8b861430da8009eef47a7092/sqlite/gnatcoll_sqlite.gpr
+20251118122519 7277c0359a6d498998e8c41492447015
+/Users/rebecca/src/github.com/agentc1/common/common.gpr
+20251124173938 ed86724466f5ef02ffd234ff941d87c1
+/Users/rebecca/src/github.com/agentc1/language/language.gpr
+20251124173924 d3b87f417f8768f30233b3d35317f5ad
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/gnat/lsp_common.gpr
+20251118122523 4bd994ee33a0fec293ba0b371307abf5
+/Users/rebecca/.local/share/alire/builds/vss_25.0.0_1ddbb26c/7f4fa5516c571c416137dbb791362e70a60c8c46a476ca9a7ae76f2d93d913e9/gnat/vss_json.gpr
+20251118122518 3575f94699bb8347d76f5c7ce6544e17
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/gnat/lsp_base.gpr
+20251118122523 6a002529777a614b08598be2f6d280b5
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/projects/config/gnatcoll_projects_constants.gpr
+20251118122519 dab496278506e71171442f9762034215
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/schema/xmlada_schema.gpr
+20251118122519 be999ebef8997d34184d408ab0edabf6
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/dom/xmlada_dom.gpr
+20251118122519 0a8f013192699add7f8ca9f7fb5f0b16
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/input_sources/xmlada_input.gpr
+20251118122519 47ea3a53d4787bec2ddb09862749fba7
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/sax/xmlada_sax.gpr
+20251118122519 06d49180c9f03c5f8a87129a0129e11a
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/xmlada_shared.gpr
+20251118122524 251bade2bba7edb48bb3da280beeb374
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/unicode/xmlada_unicode.gpr
+20251118122519 12058f20f017f7df661f89a767e769a6
+/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/distrib/xmlada.gpr
+20251118122519 4096498b23ff578f99e1610b059678db
+/Users/rebecca/.local/share/alire/builds/libgpr_25.0.0_17669998/dbc37f2e3fc0cb66c030e58c44a8f3ddb4790625c4fcc0334adee5e966ee0c62/gpr/gpr.gpr
+20251118122519 cc8ea8bdf1cb8ad25a27726e5f19777d
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/projects/gnatcoll_projects.gpr
+20251118122519 ca7beace6131c69dac607058b8f2df1c
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/core/config/gnatcoll_core_constants.gpr
+20251118122519 1296716bec7bbbd1a5f4cc47ce0cda00
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/minimal/config/gnatcoll_minimal_constants.gpr
+20251118122519 1975ea074fc23ac5c5c93aae4a4fdc6f
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/minimal/gnatcoll_minimal.gpr
+20251118122519 225596fd13db19808229adef866e4aee
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/core/gnatcoll_core.gpr
+20251118122519 ad5de8cd6cefbcec74daf0436d72eec7
+/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/gnatcoll.gpr
+20251118122519 ea69ffc84fbaa82618c6fb4ce594b7e8
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/gnat/lsp.gpr
+20251118122523 f673c08f7c750d24fcb889bb7ed74ade
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/gnat/lsp_client.gpr
+20251118122523 0ccc2542c4fab1e32a0bed5a89f0ab78
+/Users/rebecca/.local/share/alire/builds/spawn_25.0.0_c1135d5d/e1eeb8bc3c9f4b90fce999e0332e4dc3f10082dfdaa47c575a126533f8cfc75a/config/spawn_config.gpr
+20251118122523 60fcb76fc6fe400d79f661157920d5b0
+/Users/rebecca/.local/share/alire/builds/spawn_25.0.0_c1135d5d/e1eeb8bc3c9f4b90fce999e0332e4dc3f10082dfdaa47c575a126533f8cfc75a/gnat/spawn.gpr
+20251118122518 d7b4640f8f2a659ada90f2bec20ed650
+/Users/rebecca/.local/share/alire/builds/vss_25.0.0_1ddbb26c/7f4fa5516c571c416137dbb791362e70a60c8c46a476ca9a7ae76f2d93d913e9/gnat/vss_gnat.gpr
+20251118122518 b99f2bd668f2b01270e605a354770ecf
+/Users/rebecca/.local/share/alire/builds/vss_25.0.0_1ddbb26c/7f4fa5516c571c416137dbb791362e70a60c8c46a476ca9a7ae76f2d93d913e9/config/vss_config.gpr
+20251118122518 e52a1d2c6d4bcc95354cc25a2ab6feeb
+/Users/rebecca/.local/share/alire/builds/vss_25.0.0_1ddbb26c/7f4fa5516c571c416137dbb791362e70a60c8c46a476ca9a7ae76f2d93d913e9/gnat/vss_common.gpr
+20251118122518 1c11bcfcf09f0e64c5919cea5cc86bb1
+/Users/rebecca/.local/share/alire/builds/vss_25.0.0_1ddbb26c/7f4fa5516c571c416137dbb791362e70a60c8c46a476ca9a7ae76f2d93d913e9/gnat/vss_text.gpr
+20251118122518 72e1c1849ab2f2205f23f9e75fcbbb28
+/Users/rebecca/src/github.com/agentc1/lsp_client/lsp_client_lib.gpr
+20251125131217 705886e0c0b1723cc35a3f358a56e372
+[BOUND OBJECT FILES]
+/Users/rebecca/src/github.com/agentc1/common/obj/s-memory.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp_base/lsp.o
+/Users/rebecca/src/github.com/agentc1/common/obj/annotations.o
+/Users/rebecca/src/github.com/agentc1/common/obj/config.o
+/Users/rebecca/src/github.com/agentc1/common/obj/generic_stack.o
+/Users/rebecca/src/github.com/agentc1/common/obj/indent_stack.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-client_request_receivers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-client_response_senders.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-server_notification_receivers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-server_request_receivers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-server_response_senders.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/client/lsp-raw_clients.o
+/Users/rebecca/src/github.com/agentc1/common/obj/basic_types.o
+/Users/rebecca/src/github.com/agentc1/common/obj/case_handling.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp_base/uris.o
+/Users/rebecca/src/github.com/agentc1/common/obj/utf8_utils.o
+/Users/rebecca/src/github.com/agentc1/common/obj/string_utils.o
+/Users/rebecca/src/github.com/agentc1/language/obj/language-tree.o
+/Users/rebecca/src/github.com/agentc1/language/obj/language.o
+/Users/rebecca/src/github.com/agentc1/language/obj/ada_analyzer.o
+/Users/rebecca/src/github.com/agentc1/language/obj/language-ada.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/vss-json-pull_readers-look_ahead.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp_base/lsp-json_streams.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_optional.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_optional_with_read_write.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_sets.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_vectors.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-types.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-partial_results.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-errors.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-commands.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-message_io.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-text_documents.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-utilities.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-client_notification_receivers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-client_message_receivers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_responses.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-client_responses.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-common_writers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_notifications.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-generic_requests.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-client_notifications.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-client_requests.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-server_notifications.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-server_requests.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/lsp-messages-server_responses.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/client/lsp-clients-request_handlers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/client/lsp-clients-response_handlers.o
+/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/client/lsp-clients.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-configurations.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-requests-shutdown.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-language_servers.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-callbacks.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-requests.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_clients-shutdowns.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_clients.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-configurations-als.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-language_servers-interceptors.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/tests/obj_integration/als_integration_callbacks.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-requests-internals.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/obj/gps-lsp_client-language_servers-real.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/tests/obj_integration/integration_tests.o
+/Users/rebecca/src/github.com/agentc1/lsp_client/tests/obj_integration/integration_tests_main.o
+[GENERATED SOURCE FILES]
+b__integration_tests_main.ads
+b__integration_tests_main.adb
+b__integration_tests_main.ali
+[RESULTING OPTIONS]
+-L/Users/rebecca/src/github.com/agentc1/lsp_client/tests/obj_integration/
+-L/Users/rebecca/src/github.com/agentc1/lsp_client/tests/obj_integration/
+-L/Users/rebecca/src/github.com/agentc1/lsp_client/obj/
+-L/Users/rebecca/.local/share/alire/builds/vss_25.0.0_1ddbb26c/7f4fa5516c571c416137dbb791362e70a60c8c46a476ca9a7ae76f2d93d913e9/.libs/static/
+-L/Users/rebecca/.local/share/alire/builds/spawn_25.0.0_c1135d5d/e1eeb8bc3c9f4b90fce999e0332e4dc3f10082dfdaa47c575a126533f8cfc75a/.libs/spawn/static/
+-L/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/client/
+-L/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/core/lib/gnatcoll_core/static/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/minimal/lib/gnatcoll_core/static/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_25.0.0_d7d84483/0755e84c1f44e5ae72c964e4aa6ddf658fcf1cd166b90ace417b1e8a740ea4e1/projects/lib/gnatcoll_projects/static/
+-L/Users/rebecca/.local/share/alire/builds/libgpr_25.0.0_17669998/dbc37f2e3fc0cb66c030e58c44a8f3ddb4790625c4fcc0334adee5e966ee0c62/gpr/lib/production/static/
+-L/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/unicode/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/sax/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/input_sources/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/dom/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/xmlada_25.0.0_7f12fe3a/57212a3faba995f6ef21b5777aa68a9e8a82f0e37e4b4f630ebe3b93f0ae4d62/schema/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/ada_language_server_25.0.0_72b68d6b/141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3/.obj/lsp_base/
+-L/Users/rebecca/src/github.com/agentc1/language/obj/
+-L/Users/rebecca/src/github.com/agentc1/common/obj/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_sqlite_25.0.0_99777a00/5650091a3a56e65ff169ebbfc044d5f0188a882c8b861430da8009eef47a7092/sqlite/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_sql_25.0.0_99777a00/73fcab9ca8d322aa6fe6ca45d81faecda1258f40c6861bf9c8e6e185087fda71/sql/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_xref_25.0.0_99777a00/91ea7344adc1a232489e04ae954b8acd7e025cdc952dbbb7bd253bde5d3c7482/xref/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/gnatcoll_iconv_25.0.0_0848cc59/592859e7f5155ddc717fe307df02691e79057fb1a3ac53fb26216daf336094b5/iconv/lib/static/
+-L/Users/rebecca/.local/share/alire/builds/aunit_25.0.0_3882c581/a08b5478e5d4f6dffbe7123e401b008ba35115b085d3c0817ded26ddb71e7e8b/lib/aunit/native-full/
+-L/users/rebecca/.local/share/alire/toolchains/gnat_native_15.1.2_60748c54/lib/gcc/aarch64-apple-darwin23.6.0/15.0.1/adalib/
+-static
+/users/rebecca/.local/share/alire/toolchains/gnat_native_15.1.2_60748c54/lib/gcc/aarch64-apple-darwin23.6.0/15.0.1/adalib/libgnarl.a
+/users/rebecca/.local/share/alire/toolchains/gnat_native_15.1.2_60748c54/lib/gcc/aarch64-apple-darwin23.6.0/15.0.1/adalib/libgnat.a

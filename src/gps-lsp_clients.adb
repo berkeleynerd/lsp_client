@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+with Ada.Containers.Vectors;
 --                               GNAT Studio                                --
 --                                                                          --
 --                     Copyright (C) 2018-2025, AdaCore                     --
@@ -58,8 +58,6 @@ package body GPS.LSP_Clients is
    Throttle_Max    : constant := 4;
    --  Handle throttling limits for relaunching the server: relaunch a
    --  maximum of Throttle_Max launches within a given Throttle_Period.
-
-   procedure Process_Command_Queue (Self : in out LSP_Client'Class);
 
    procedure Reject_All_Requests (Self : in out LSP_Client'Class);
    --  Reject all ongoing (sent to the language server) and queued requests.
@@ -306,6 +304,56 @@ package body GPS.LSP_Clients is
          end if;
       end if;
    end Enqueue;
+
+   -----------------------
+   -- Snapshot_Commands --
+   -----------------------
+
+   function Snapshot_Commands
+     (Self : LSP_Client'Class)
+      return Command_Snapshot_Array is
+      use type GPS.LSP_Client.Text_Documents.Text_Document_Handler_Access;
+      package Snap_Vectors is new Ada.Containers.Vectors
+        (Index_Type   => Positive,
+         Element_Type => Command_Snapshot);
+      Result : Snap_Vectors.Vector;
+      Cursor : Command_Lists.Cursor := Self.Commands.First;
+   begin
+      while Command_Lists.Has_Element (Cursor) loop
+         declare
+            Item : constant Command := Command_Lists.Element (Cursor);
+            Snap : Command_Snapshot := (Kind => Item.Kind,
+                                        others => <>);
+         begin
+            case Item.Kind is
+               when Open_File | Close_File =>
+                  Snap.File := Item.File;
+               when Changed_File =>
+                  Snap.Handler_Present := Item.Handler /= null;
+               when others =>
+                  null;
+            end case;
+            Snap_Vectors.Append (Result, Snap);
+         end;
+         Command_Lists.Next (Cursor);
+      end loop;
+
+      if Result.Is_Empty then
+         return (1 .. 0 => <>);
+      else
+         declare
+            Count     : constant Natural := Natural (Result.Length);
+            Out_Array : Command_Snapshot_Array (1 .. Count);
+            Index     : Positive := Out_Array'First;
+         begin
+            for Elem of Result loop
+               Out_Array (Index) := Elem;
+               Index := Index + 1;
+            end loop;
+            return Out_Array;
+         end;
+      end if;
+   end Snapshot_Commands;
 
    -------------------------
    -- Initialize_Response --
@@ -959,12 +1007,12 @@ package body GPS.LSP_Clients is
    begin
       Trace (Me, Occurrence);
 
-       if Self.Errors_Writable_File /= Invalid_File then
+      if Self.Errors_Writable_File /= Invalid_File then
          GNATCOLL.VFS.Write
            (Self.Errors_Writable_File,
             Exception_Information (Occurrence)
             & Ada.Characters.Latin_1.LF);
-       end if;
+      end if;
    end On_Exception;
 
    ----------------

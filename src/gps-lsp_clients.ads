@@ -137,6 +137,10 @@ package GPS.LSP_Clients is
    --  Adds request to the queue. If server has not been started yet,
    --  On_Reject will be called immediately and request will be not enqueued.
 
+   procedure Process_Command_Queue (Self : in out LSP_Client'Class);
+   --  Execute queued commands (change notifications, pending requests). Hosts
+   --  without GNAT Studio's event loop must call this regularly.
+
    procedure Cancel
      (Self    : in out LSP_Client'Class;
       Request : in out GPS.LSP_Client.Requests.Request_Access);
@@ -334,6 +338,20 @@ private
       Item : in out Command);
    --  Put given command into the queue. If the server is shut down,
    --  Command.Request is destroyed and nullified instead.
+
+   type Command_Snapshot is record
+      Kind            : Command_Kinds := Command_Kinds'First;
+      File            : GNATCOLL.VFS.Virtual_File := GNATCOLL.VFS.No_File;
+      Handler_Present : Boolean := False;
+   end record;
+
+   type Command_Snapshot_Array is
+     array (Positive range <>) of Command_Snapshot;
+
+   function Snapshot_Commands
+     (Self : LSP_Client'Class)
+      return Command_Snapshot_Array;
+   --  Return a snapshot of the current command queue for inspection.
 
    overriding procedure On_Error (Self : in out LSP_Client; Error : String);
 

@@ -32,8 +32,8 @@ with "spawn";
 -- Provides LSP.Clients, LSP.Messages, LSP.Types packages
 with "lsp_client";
 
-with "language";
-with "shared";
+with "../language/language";
+with "../shared/shared";
 
 project lsp_client_lib is
 
