@@ -4,6 +4,18 @@
 *.cswi
 *.stderr
 *.stdout
+*.bexch
+*.deps
+
+# Binder-generated Ada sources
+b__*.adb
+b__*.ads
 
 # Build directories
 obj/
+tests/obj/
+tests/obj_integration/
+
+# Tool outputs
+alire/alr_test_local.log
+alire/alr_test_local.xml

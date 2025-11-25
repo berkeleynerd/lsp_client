@@ -36,15 +36,6 @@ package body ALS_Integration_Callbacks is
             text       => Self.Buffer));
    end Build_Did_Open_Params;
 
-   overriding procedure On_Server_Started
-     (Self   : in out Test_Listener;
-      Server : not null GPS.LSP_Client.Language_Servers.Language_Server_Access)
-   is
-      pragma Unreferenced (Server);
-   begin
-      Self.Ready := True;
-   end On_Server_Started;
-
    overriding procedure On_Show_Message
      (Self   : access Diagnostics_Collector;
       Params : LSP.Messages.ShowMessageParams)

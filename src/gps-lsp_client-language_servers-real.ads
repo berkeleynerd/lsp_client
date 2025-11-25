@@ -21,7 +21,6 @@ with LSP.Types;
 
 with GPS.LSP_Client.Callbacks;
 with GPS.LSP_Client.Configurations;
-limited with GPS.LSP_Client.Language_Servers.Interceptors;
 with GPS.LSP_Clients;
 
 with Language; use Language;
@@ -29,15 +28,11 @@ with Language; use Language;
 package GPS.LSP_Client.Language_Servers.Real is
 
    type Real_Language_Server
-     (Callbacks           : not null access
+     (Callbacks     : not null access
         GPS.LSP_Client.Callbacks.LSP_Callback_Interface'Class;
-      Configuration       : not null access
+      Configuration : not null access
         GPS.LSP_Client.Configurations.Server_Configuration'Class;
-      Server_Interceptor  : not null access
-        Interceptors.Server_Listener'Class;
-      Request_Interceptor : not null access
-        Interceptors.Request_Listener'Class;
-      Language            : not null access Language_Root'Class)
+      Language      : not null access Language_Root'Class)
    is
      new Abstract_Language_Server
      and GPS.LSP_Clients.LSP_Client_Listener with
@@ -59,15 +54,11 @@ package GPS.LSP_Client.Language_Servers.Real is
       return Boolean;
 
    function Create
-     (Callbacks           : not null access
+     (Callbacks     : not null access
         GPS.LSP_Client.Callbacks.LSP_Callback_Interface'Class;
-      Configuration       : not null access
+      Configuration : not null access
         GPS.LSP_Client.Configurations.Server_Configuration'Class;
-      Server_Interceptor  : not null access
-        Interceptors.Server_Listener'Class;
-      Request_Interceptor : not null access
-        Interceptors.Request_Listener'Class;
-      Language            : not null access Language_Root'Class)
+      Language      : not null access Language_Root'Class)
       return not null Language_Server_Access;
    --  Create and initialize language server object. Language server
    --  must be configured and server process should be started before it

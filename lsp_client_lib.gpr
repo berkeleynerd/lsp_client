@@ -13,7 +13,7 @@
 --   - All LSP request types (hover, completion, references, etc.)
 --   - LSP response handling
 --   - Text document synchronization
---   - Server configuration (ALS, clangd)
+--   - Server configuration (ALS)
 --
 -- What's Excluded:
 --   - GUI integration (legacy GtkAda layer removed)
@@ -54,9 +54,6 @@ project lsp_client_lib is
       "gps-lsp_client-requests-range_formatting.adb",
       "gps-lsp_client-requests-on_type_formatting.ads",
       "gps-lsp_client-requests-on_type_formatting.adb",
-      "gps-lsp_client-configurations-clangd.ads",
-      "gps-lsp_client-configurations-clangd.adb"
-      ,
       --  Shell requests require GNATCOLL.Scripts (not needed in core)
       "gps-lsp_client-requests-shell.ads",
       "gps-lsp_client-requests-shell.adb"

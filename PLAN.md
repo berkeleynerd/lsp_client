@@ -38,7 +38,8 @@ context in one place.
     - Retrieves the underlying `LSP_Client` via `Server.Get_Client`.
     - Installs a `Diagnostics_Collector` as notification handler via
       `LSP.Clients.Set_Notification_Handler`.
-    - Waits up to 5 seconds for `Test_Listener.On_Server_Started` to fire.
+    - Waits up to 5 seconds for `GPS.LSP_Clients.Is_Ready` to report True
+      (polling while driving `Spawn.Processes.Monitor_Loop`).
     - On success would:
       - Send `didOpen` with baseline text.
       - Rewrite `main.adb` with a typo.
@@ -51,7 +52,7 @@ context in one place.
       - ALS is invoked successfully (path resolution and process spawn work).
       - But the ALS client library (`GPS.LSP_Clients`) never sees a valid
         `initialize` response that triggers `Response_Handler.Initialize_Response`
-        and thus `Listener.On_Server_Started` within the timeout.
+        and thus flips `Is_Ready` within the timeout.
 
 - **ALS binary**
   - Source: installed by Alire at
@@ -119,7 +120,7 @@ Key pieces in `src/gps-lsp_clients.adb`/`.ads`:
     - `Self.Client.On_Initialized_Notification;`
     - `Self.Client.Listener.On_Server_Started;`
     - `Process_Command_Queue (Self.Client.all);`
-  - Our integration test waits on `Test_Listener.Ready` as the indicator that
+  - Our integration test polls `GPS.LSP_Clients.Is_Ready` as the indicator that
     this path ran successfully.
 
 ### 3. High-level ALS wrapper (`GPS.LSP_Client.Language_Servers.Real`)
@@ -150,10 +151,8 @@ Key pieces in `src/gps-lsp_client-language_servers-real.ads/adb`:
     - `Initialization_Options` from `Configuration.Configuration_Settings`.
 
 - `overriding procedure On_Server_Started (Self : in out Real_Language_Server)`
-  - Forwards the event to the `Server_Interceptor`:
-    - `Self.Server_Interceptor.On_Server_Started (Self'Unchecked_Access);`
-  - In our test, the `Server_Interceptor` is `Test_Listener`, which sets
-    `Ready := True` when this is invoked.
+  - Signals readiness internally (for example, our diagnostics logger writes
+    a `server-started` entry) and the client’s `Is_Ready` flag flips to True.
 
 ---
 
@@ -202,14 +201,14 @@ Given the refactor to use `Real.Create` + `Real.Start`, we now:
 
 However:
 
-- `Test_Listener.On_Server_Started` (the `Server_Listener` interceptor) is still
-  not invoked within the 5-second timeout in `ALS_Diagnostics_On_Typo`.
+- `GPS.LSP_Clients.Is_Ready` never flips to True within the 5-second timeout in
+  `ALS_Diagnostics_On_Typo`.
 - This means:
   - Either ALS is not replying to `initialize` in a way our wrapper expects, or
   - ALS is replying, but our client doesn’t recognize or decode the response
     as a valid `Initialize_Response`.
   - In either case, `Response_Handler.Initialize_Response` is never reached,
-    so `Is_Ready` remains `False` and `Listener.On_Server_Started` isn’t fired.
+    so `Is_Ready` remains `False` and our readiness poll never succeeds.
 
 This is not due to incorrect Start/Initialize ordering anymore; we are aligned
 with the API usage expected by `GPS.LSP_Client.Language_Servers.Real`. The
@@ -282,17 +281,13 @@ The VS Code extension is our reference client. We will:
 ### Step 3: Add Tracing & Logging
 
 - **Client-side (Ada, in this repo)**
-  - Use GNATCOLL.Traces already referenced in `GPS.LSP_Clients` to log:
-    - `Start` invocations.
-    - When `On_Started` runs (and an `initialize` request is sent).
-    - When `Response_Handler.Initialize_Response` is called.
-    - When we call `Listener.On_Server_Started`.
-  - Optionally, add test-only `Put_Line` logs in `Integration_Tests`:
-    - Before and after `Real.Start`.
-    - When `Test_Listener.On_Server_Started` is called.
-    - When `Diagnostics_Collector.On_Publish_Diagnostics` fires.
-  - Guard these logs via an environment variable (e.g. `ALS_TEST_TRACE`) so
-    they can be turned on as needed.
+  - Use the lightweight diagnostics hook (`GPS.LSP_Client.Diagnostics`) to log:
+    - `start`, `restart`, `shutdown` events.
+    - `send-request`, `receive-reply`, and other lifecycle callbacks.
+  - Enable logging via the `LSP_CLIENT_TRACE` environment variable. When set to
+    a directory, the library writes timestamped trace files there.
+  - Integration tests can set the variable to capture traces for debugging and
+    leave it unset during normal runs.
 
 - **Server-side (ALS)**
   - Use `--tracefile` support in ALS (see `doc/traces.md` in ALS repo):
@@ -313,7 +308,7 @@ To isolate issues, we treat integration as several smaller tests:
      - Create temp workspace and callbacks as today.
      - Use `Real.Create` + `Real.Start`.
      - Wait (with a longer timeout, e.g. 10–15 seconds) for
-       `Test_Listener.Ready`.
+       `GPS.LSP_Clients.Is_Ready (Client)` to become True.
      - Do *not* send `didOpen` or `didChange`.
    - If this still times out:
      - Check ALS traces for the presence of `initialize` and any exceptions.
