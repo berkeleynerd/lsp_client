@@ -33,3 +33,11 @@ Diagnostics
   `lsp_client-YYYYMMDD-HHMMSS.log` into the current directory; when the value is
   a directory or file path, logs are written there instead. Leaving the variable
   unset keeps tracing disabled with zero overhead.
+
+## macOS toolchain fix
+
+macOS users must run `./fix_toolchain.sh` (present in this directory) whenever
+the GNAT toolchain is freshly installed via `alr`. It wipes the bundled
+`include-fixed` headers and updates the SDK symlink so GNAT can compile the C
+sources that ship with dependencies such as `gnatcoll` and `ncursesada`.
+Skip this step on non-macOS hosts.
