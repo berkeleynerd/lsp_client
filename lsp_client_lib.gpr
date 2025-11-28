@@ -53,10 +53,7 @@ project lsp_client_lib is
       "gps-lsp_client-requests-range_formatting.ads",
       "gps-lsp_client-requests-range_formatting.adb",
       "gps-lsp_client-requests-on_type_formatting.ads",
-      "gps-lsp_client-requests-on_type_formatting.adb",
-      --  Shell requests require GNATCOLL.Scripts (not needed in core)
-      "gps-lsp_client-requests-shell.ads",
-      "gps-lsp_client-requests-shell.adb"
+      "gps-lsp_client-requests-on_type_formatting.adb"
    );
 
    package Compiler is

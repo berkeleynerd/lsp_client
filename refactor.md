@@ -5,9 +5,9 @@ Context
 -------
 This library currently mirrors the feature surface GNAT Studio needs, but our
 command-line Ada/SPARK editor only embraces a subset of that behavior. The
-items below rank the highest effort-to-payoff refactors, moving from “largest
-win” to “possibly keep depending on future editor ambitions”. For each, we note
-why it is safe to drop, the benefits, and any knock-on tasks.
+ items below rank the highest effort-to-payoff refactors, moving from “largest
+ win” to “possibly keep depending on future editor ambitions”. For each, we note
+ why it is safe to drop, the benefits, and any knock-on tasks.
 
 1. Remove Clangd/C++ Support Stack
 ----------------------------------
@@ -41,6 +41,9 @@ why it is safe to drop, the benefits, and any knock-on tasks.
 
 3. Drop Partial Result Framework
 --------------------------------
+- **Status**: Completed in `lsp_client` core; TUI no longer depends on partial
+  result callbacks and new clients should treat workspace symbol responses as
+  full-result only.
 - **Scope**: Remove `GPS.LSP_Client.Partial_Results`, the `$ /progress`
   bookkeeping in `GPS.LSP_Clients`, and the overrides in request packages.
 - **Why**: Studio streams large lists into widgets; our CLI can wait for the
@@ -54,6 +57,8 @@ why it is safe to drop, the benefits, and any knock-on tasks.
 
 4. Remove GNATCOLL Scriptable “Shell” Requests
 ---------------------------------------------
+- **Status**: Completed in `lsp_client` core; `GPS.LSP_Client.Requests.Shell`
+  has been removed and no TUI code depends on the scripting callbacks.
 - **Scope**: Delete `GPS.LSP_Client.Requests.Shell` and the
   `GNATCOLL.Scripts`/`GNATCOLL.Any_Types` callbacks it requires.
 - **Why**: This feature bridges ALS commands into GNAT Studio’s scripting
