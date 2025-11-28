@@ -41,3 +41,23 @@ the GNAT toolchain is freshly installed via `alr`. It wipes the bundled
 `include-fixed` headers and updates the SDK symlink so GNAT can compile the C
 sources that ship with dependencies such as `gnatcoll` and `ncursesada`.
 Skip this step on non-macOS hosts.
+
+## Fedora Asahi Remix (aarch64) prerequisites
+
+On Fedora Asahi Remix 43 (Workstation Edition, aarch64), building this crate
+and its dependencies via Alire requires that the system C toolchain and GMP
+development headers be installed. Before running `alr build` or `alr install`
+for `lsp_client` (or any sibling crate in this monorepo), install:
+
+```bash
+sudo dnf install gcc glibc-devel glibc-headers gmp-devel ncurses-devel ncurses-compat-libs
+```
+
+- `gcc`, `glibc-devel`, and `glibc-headers` provide the standard C headers
+  (such as `<string.h>`) that `libgpr` and other C components depend on.
+- `gmp-devel` provides `gmp.h` and the `gmp.pc` file so `gnatcoll_gmp` and
+  `libgmp` are found correctly via `pkg-config`; without it, builds will fail
+  with `fatal error: gmp.h: No such file or directory`.
+- `ncurses-devel` and `ncurses-compat-libs` are only required by the TUI
+  application crate, but installing them once allows end-to-end builds of the
+  GNAT Studio workspace on this platform.
