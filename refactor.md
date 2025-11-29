@@ -70,6 +70,10 @@ command-line Ada/SPARK editor only embraces a subset of that behavior. The
 
 5. Trim GNAT Studio Execute Command Helpers
 -------------------------------------------
+- **Status**: Completed in `lsp_client` core; specialized helpers for
+  `als-reload-project` and `als-show-dependencies` have been removed, leaving
+  only the generic `Execute_Command` and `Named_Parameters` layers for clients
+  that explicitly opt into ALS-specific commands.
 - **Scope**: Remove specialized executeCommand wrappers such as
   `Reload_Project`, `Show_Dependencies`, and `Shell` invocations.
 - **Why**: These correspond to Studio-only workflows (project reloading,

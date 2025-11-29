@@ -37,6 +37,13 @@ context in one place.
     implemented directly in the editor front end instead of via `GNATCOLL.Scripts`.
   - Status: **Completed**; TUI builds cleanly against the updated library.
 
+- **ExecuteCommand helpers (Studio-only commands)**
+  - Specialized wrappers for `als-reload-project` and
+    `als-show-dependencies` have been removed. Consumers that need these ALS
+    commands can issue generic `workspace/executeCommand` requests directly.
+  - Status: **Completed** in this repo; no TUI components referenced these
+    helpers, and both `alr build` and the TUI build remain green.
+
 - **ALS integration tests**
   - Project: `tests/integration_tests.gpr`
   - Executable: `integration_tests_main`
