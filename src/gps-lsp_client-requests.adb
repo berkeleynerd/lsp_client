@@ -18,7 +18,6 @@
 with Ada.Unchecked_Deallocation;
 
 with GPS.LSP_Client.Language_Servers;
-with GPS.LSP_Clients;
 with GNATCOLL.Traces; use GNATCOLL.Traces;
 
 package body GPS.LSP_Client.Requests is
@@ -106,88 +105,10 @@ package body GPS.LSP_Client.Requests is
       Item := null;
    end Destroy;
 
-   -------------
-   -- Execute --
-   -------------
-
-   function Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access) return Boolean is
-   begin
-      return Execute (Language, Request).Has_Request;
-   end Execute;
-
-   -------------
-   -- Execute --
-   -------------
-
-   procedure Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access)
-   is
-      Dummy : Boolean;
-   begin
-      Dummy := Execute (Language, Request);
-   end Execute;
-
-   -------------
-   -- Execute --
-   -------------
-
-   function Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access) return Reference
-   is
-      use type GPS.LSP_Client.Callbacks.LSP_Callback_Access;
-      use type GPS.LSP_Client.Language_Servers.Language_Server_Access;
-
-      Server : GPS.LSP_Client.Language_Servers.Language_Server_Access;
-      Client : GPS.LSP_Clients.LSP_Client_Access;
-
-      On_Checks_Passed : Boolean := True;
-
-   begin
-      Trace (Me_Debug, "Executing: " & Request'Image);
-      return Result : Reference do
-         if Request = null then
-            return;
-         end if;
-
-         if Request.Callbacks = null then
-            On_Checks_Passed := False;
-         end if;
-
-         if On_Checks_Passed then
-            Server := Request.Callbacks.Get_Language_Server (Language);
-
-            if Server = null then
-               --  Reject the request when there is no language server
-               --  configured
-               On_Checks_Passed := False;
-            end if;
-         end if;
-
-         if On_Checks_Passed then
-            Client := Server.Get_Client;
-
-            if not Client.Is_Ready
-              or else not Request.Is_Request_Supported (Client.Capabilities)
-            then
-               --  Not ready or not supported
-               On_Checks_Passed := False;
-            end if;
-         end if;
-
-         if On_Checks_Passed then
-            GPS.LSP_Client.Requests.Initialize (Result, Request, Server);
-            Server.Execute (Request);
-
-         else
-            Request.On_Rejected (GPS.LSP_Client.Requests.Server_Not_Ready);
-            Destroy (Request);
-         end if;
-      end return;
-   end Execute;
+   --  Execute helpers that routed requests through Language objects and a
+   --  multi-language server registry were removed in this Ada/SPARK-only
+   --  variant. Callers are expected to enqueue requests via their owning
+   --  LSP client/server instances directly.
 
    --------------
    -- Finalize --

@@ -19,3 +19,11 @@ tests/obj_integration/
 # Tool outputs
 alire/alr_test_local.log
 alire/alr_test_local.xml
+
+# Alire-generated state
+alire/
+alire.lock
+build_hash_inputs
+flags
+settings.toml
+config/*_config.*

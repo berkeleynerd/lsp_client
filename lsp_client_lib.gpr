@@ -6,7 +6,7 @@
 --
 -- Dependencies:
 --   External: vss, spawn, ada_language_server (for LSP.* packages)
---   Internal: language, shared
+--   Internal: shared
 --
 -- What's Included:
 --   - LSP client lifecycle (start/stop/restart)
@@ -32,7 +32,6 @@ with "spawn";
 -- Provides LSP.Clients, LSP.Messages, LSP.Types packages
 with "lsp_client";
 
-with "../language/language";
 with "../shared/gnatstudio_shared";
 
 project lsp_client_lib is
@@ -53,10 +52,7 @@ project lsp_client_lib is
       "gps-lsp_client-requests-range_formatting.ads",
       "gps-lsp_client-requests-range_formatting.adb",
       "gps-lsp_client-requests-on_type_formatting.ads",
-      "gps-lsp_client-requests-on_type_formatting.adb",
-      --  Shell requests require GNATCOLL.Scripts (not needed in core)
-      "gps-lsp_client-requests-shell.ads",
-      "gps-lsp_client-requests-shell.adb"
+      "gps-lsp_client-requests-on_type_formatting.adb"
    );
 
    package Compiler is

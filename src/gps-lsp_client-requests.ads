@@ -68,7 +68,6 @@ with LSP.Types;
 
 with GPS.LSP_Client.Callbacks;
 limited private with GPS.LSP_Client.Language_Servers;
-with Language;             use Language;
 
 package GPS.LSP_Client.Requests is
 
@@ -166,25 +165,6 @@ package GPS.LSP_Client.Requests is
    ---------------------------------------------------------
    -- Utility subprograms to execute and destroy requests --
    ---------------------------------------------------------
-
-   function Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access) return Boolean;
-   --  Return False if the request was not sent due to pre-send checks failing
-   --  Note: It is not recommended to use this subprogram. It's return value
-   --  is almost meaningless, On_Rejected subprogam of the LSP_Request should
-   --  be redefined to process case when request is rejected immediately.
-
-   procedure Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access);
-   --  The same as above but without returning the result
-
-   function Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access) return Reference;
-   --  Execute request using language server for the given language. Request
-   --  parameter is set to null.
 
    procedure Destroy
      (Item         : in out Request_Access;
