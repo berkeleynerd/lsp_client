@@ -44,6 +44,16 @@ context in one place.
   - Status: **Completed** in this repo; no TUI components referenced these
     helpers, and both `alr build` and the TUI build remain green.
 
+- **Spawn / environment abstraction**
+  - ALS’s Ada client library is built on `GNATCOLL.Spawn` for process
+    management and expects hosts to pump `Spawn.Processes.Monitor_Loop` and
+    `GPS.LSP_Clients.Process_Command_Queue`. The TUI already centralizes this
+    in `TUI.Backend.Tick`, and our callbacks always return
+    `Spawn.Environments.System_Environment`.
+  - Decision: **Keep** the existing Spawn-based abstraction and environment
+    hook; it is required by ALS’s client layer, and TUI does not currently
+    need custom environments or client-side auto-restart timers.
+
 - **ALS integration tests**
   - Project: `tests/integration_tests.gpr`
   - Executable: `integration_tests_main`
