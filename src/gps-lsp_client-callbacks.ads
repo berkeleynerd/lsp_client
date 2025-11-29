@@ -32,7 +32,6 @@
 --  GPS.Kernel methods.
 
 with GNATCOLL.VFS;
-with Language;
 with LSP.Messages;
 with Spawn.Environments;
 limited with GPS.LSP_Client.Language_Servers;
@@ -89,11 +88,10 @@ package GPS.LSP_Client.Callbacks is
    --  Return the project root directory
 
    function Get_Language_Server
-     (Self : LSP_Callback_Interface;
-      Lang : not null Language.Language_Access)
+     (Self : LSP_Callback_Interface)
       return GPS.LSP_Client.Language_Servers.Language_Server_Access
       is abstract;
-   --  Retrieve the language server associated with the given language.
+   --  Retrieve the language server associated with the current session.
 
    ----------------------
    -- Document Lifecycle
@@ -192,8 +190,7 @@ package GPS.LSP_Client.Callbacks is
       return GNATCOLL.VFS.Virtual_File is (GNATCOLL.VFS.No_File);
 
    overriding function Get_Language_Server
-     (Self : Null_Callback;
-      Lang : not null Language.Language_Access)
+     (Self : Null_Callback)
       return GPS.LSP_Client.Language_Servers.Language_Server_Access;
 
    overriding function Build_Did_Open_Params

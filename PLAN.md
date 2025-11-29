@@ -20,9 +20,39 @@ context in one place.
       - `Virtual_File` ↔ `DocumentUri` round-trips (spaces, relative/absolute, case).
     - `GPS.LSP_Client.Text_Documents`:
       - Full-text `Get_Did_Change_Message` behavior (version increments, payload).
-    - `GPS.LSP_Client.Callbacks.Null_Callback`:
+      - `GPS.LSP_Client.Callbacks.Null_Callback`:
       - `Build_Did_Open_Params` wiring (uri, languageId, version, text).
   - Status: **Green** in this workspace.
+
+- **Partial result framework**
+  - `GPS.LSP_Client.Partial_Results` and `$ /progress` bookkeeping have been
+    removed from the client core; requests such as workspace symbols now expose
+    full-result responses only.
+  - Status: **Completed** in this library; downstream editors should no longer
+    rely on partial result callbacks when integrating `lsp_client`.
+
+- **Shell requests (GNATCOLL.Scripts bridge)**
+  - `GPS.LSP_Client.Requests.Shell` has been deleted from the core library and
+    is no longer part of the public API. Scriptable ALS commands should be
+    implemented directly in the editor front end instead of via `GNATCOLL.Scripts`.
+  - Status: **Completed**; TUI builds cleanly against the updated library.
+
+- **ExecuteCommand helpers (Studio-only commands)**
+  - Specialized wrappers for `als-reload-project` and
+    `als-show-dependencies` have been removed. Consumers that need these ALS
+    commands can issue generic `workspace/executeCommand` requests directly.
+  - Status: **Completed** in this repo; no TUI components referenced these
+    helpers, and both `alr build` and the TUI build remain green.
+
+- **Spawn / environment abstraction**
+  - ALS’s Ada client library is built on `GNATCOLL.Spawn` for process
+    management and expects hosts to pump `Spawn.Processes.Monitor_Loop` and
+    `GPS.LSP_Clients.Process_Command_Queue`. The TUI already centralizes this
+    in `TUI.Backend.Tick`, and our callbacks always return
+    `Spawn.Environments.System_Environment`.
+  - Decision: **Keep** the existing Spawn-based abstraction and environment
+    hook; it is required by ALS’s client layer, and TUI does not currently
+    need custom environments or client-side auto-restart timers.
 
 - **ALS integration tests**
   - Project: `tests/integration_tests.gpr`

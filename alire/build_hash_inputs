@@ -1,5 +1,5 @@
-dependency:ada_language_server=25.0.0=141589acc873988d0fe576d07fa547a4805ee273ad74f5a36bf6f6f8d50962f3
-dependency:aunit=25.0.0=a08b5478e5d4f6dffbe7123e401b008ba35115b085d3c0817ded26ddb71e7e8b
+dependency:ada_language_server=25.0.0=a97c7c20b976af539aa3f8f2308b578d341b4b6ee9ccdf9c5d817ea5c4a30048
+dependency:aunit=25.0.0=e017720da2085cb8f0338616d1a4b56e2459e2db91503f0d76caad9b01ab0a94
 external:BUILD=default
 external:LIBRARY_TYPE=static
 external:LSP_CLIENT_LIBRARY_TYPE=default

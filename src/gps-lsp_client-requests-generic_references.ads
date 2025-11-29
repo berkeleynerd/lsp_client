@@ -41,11 +41,9 @@ package GPS.LSP_Client.Requests.Generic_References is
    function Has_Request (Self : Reference) return Boolean;
    --  Return True when associated request object is alive.
 
-   function Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access) return Reference;
-   --  Execute request using language server for the given language. Request
-   --  parameter is set to null and reference is returned.
+   function Execute (Request : in out Request_Access) return Reference;
+   --  Execute request using the associated language server. Request parameter
+   --  is set to null and reference is returned.
 
 private
 

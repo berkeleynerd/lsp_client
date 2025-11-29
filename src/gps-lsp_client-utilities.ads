@@ -28,7 +28,6 @@
 --  These will be reimplemented for TUI or added via Callbacks in Phase 5.
 
 with GNATCOLL.VFS;
-with Language;
 with LSP.Messages;
 
 package GPS.LSP_Client.Utilities is
@@ -41,16 +40,5 @@ package GPS.LSP_Client.Utilities is
      (Item : LSP.Messages.DocumentUri) return GNATCOLL.VFS.Virtual_File;
    --  Converts DocumentUri to Virtual_File.
    --  Always normalizes paths for security (hardcoded, was preference).
-
-   function To_Language_Category
-     (K            : LSP.Messages.SymbolKind;
-      Is_Procedure : Boolean := False)
-      return Language.Language_Category;
-   --  Converts LSP SymbolKind to GNAT Studio Language_Category.
-
-   function To_Construct_Visibility
-     (V : LSP.Messages.Als_Visibility)
-      return Language.Construct_Visibility;
-   --  Converts ALS visibility to GNAT Studio Construct_Visibility.
 
 end GPS.LSP_Client.Utilities;
