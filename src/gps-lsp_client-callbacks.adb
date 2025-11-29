@@ -64,10 +64,9 @@ package body GPS.LSP_Client.Callbacks is
    end Get_Server_Environment;
 
    overriding function Get_Language_Server
-     (Self : Null_Callback;
-      Lang : not null Language.Language_Access)
+     (Self : Null_Callback)
       return GPS.LSP_Client.Language_Servers.Language_Server_Access is
-      pragma Unreferenced (Self, Lang);
+      pragma Unreferenced (Self);
    begin
       return null;
    end Get_Language_Server;

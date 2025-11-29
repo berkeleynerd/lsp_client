@@ -597,15 +597,6 @@ gnatcoll_gmp = "^25"
 gnatcoll_iconv = "^25"
 prettier_ada = "^25"
 [[solution.state]]
-crate = "language"
-fulfilment = "linked"
-pinned = false
-transitivity = "direct"
-versions = "~0.1.0"
-[solution.state.link]
-lockfiled = true
-path = "../language"
-[[solution.state]]
 crate = "libadalang"
 fulfilment = "solved"
 pinned = false
@@ -716,10 +707,10 @@ maintainers-logins = [
 "Fabien-Chouteau",
 ]
 name = "libgmp"
-notes = "Detected at /usr/bin/pkg-config"
+notes = "Provided by system package: gmp-devel"
 version = "6.3.0"
 [solution.state.release.origin]
-url = "external:path /usr/bin/pkg-config"
+url = "system:gmp-devel"
 [[solution.state]]
 crate = "libgnatdoc"
 fulfilment = "solved"

@@ -93,15 +93,13 @@ package body GPS.LSP_Client.Language_Servers.Real is
      (Callbacks     : not null access
         GPS.LSP_Client.Callbacks.LSP_Callback_Interface'Class;
       Configuration : not null access
-        GPS.LSP_Client.Configurations.Server_Configuration'Class;
-      Language      : not null access Language_Root'Class)
+        GPS.LSP_Client.Configurations.Server_Configuration'Class)
       return not null Language_Server_Access is
    begin
       return Result : constant not null Language_Server_Access :=
         new Real_Language_Server
           (Callbacks     => Callbacks,
-           Configuration => Configuration,
-           Language      => Language)
+           Configuration => Configuration)
       do
          Real_Language_Server'Class (Result.all).Initialize;
       end return;

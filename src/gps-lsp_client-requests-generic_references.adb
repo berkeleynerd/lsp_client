@@ -22,16 +22,14 @@ package body GPS.LSP_Client.Requests.Generic_References is
    -- Execute --
    -------------
 
-   function Execute
-     (Language : not null Standard.Language.Language_Access;
-      Request  : in out Request_Access) return Reference is
+   function Execute (Request : in out Request_Access) return Reference is
    begin
       return Result : Reference do
          GPS.LSP_Client.Requests.Initialize
            (Result,
             GPS.LSP_Client.Requests.Request_Access (Request),
             GPS.LSP_Client.Language_Servers.Language_Server_Access'(null));
-         Execute (Language, GPS.LSP_Client.Requests.Request_Access (Request));
+         null;
       end return;
    end Execute;
 

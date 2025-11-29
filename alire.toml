@@ -15,13 +15,9 @@ tags = ["ada", "gnatstudio", "lsp", "language-server"]
 project-files = [
   "lsp_client_lib.gpr",
   "tests/tests.gpr",
-  "tests/integration_tests.gpr",
 ]
 
-executables = ["tests", "integration_tests_main"]
-
-[[depends-on]]
-language = "~0.1.0"
+executables = ["tests"]
 
 [[depends-on]]
 common = "~0.1.0"
@@ -36,9 +32,6 @@ ada_language_server = "~25.0"
 aunit = "~25.0.0"
 
 # Local development pins to sibling crates
-[[pins]]
-language = { path = "../language" }
-
 [[pins]]
 shared = { path = "../shared" }
 

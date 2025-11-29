@@ -15,7 +15,6 @@ with Ada.Containers.Vectors;
 -- of the license.                                                          --
 ------------------------------------------------------------------------------
 
-with Ada.Characters.Handling;
 with Ada.Characters.Latin_1;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Interfaces;
@@ -765,7 +764,7 @@ package body GPS.LSP_Clients is
             use GPS.LSP_Client.Requests;
             S : constant String :=
               "The language server has reported the following error "
-              & "for language:" & Self.Language.Get_Name
+              & "for language: Ada"
               & ASCII.LF & "Code: " & error.Value.code'Img & ASCII.LF
               & VSS.Strings.Conversions.To_UTF_8_String
               (error.Value.message);
@@ -831,7 +830,7 @@ package body GPS.LSP_Clients is
       else
          declare
             Message : constant String :=
-              "The language server for " & Self.Language.Get_Name
+              "The language server for Ada"
               & " had to be restarted more than" & Throttle_Max'Img
               & " times in the past" & Integer (Throttle_Period)'Img
               & " seconds - aborting. Please report this.";
@@ -1330,10 +1329,10 @@ package body GPS.LSP_Clients is
 
    overriding function Request_Id_Prefix
      (Self : LSP_Client) return VSS.Strings.Virtual_String is
+      pragma Unreferenced (Self);
    begin
       return
-        VSS.Strings.Conversions.To_Virtual_String
-          (Ada.Characters.Handling.To_Lower (Self.Language.Get_Name));
+        VSS.Strings.Conversions.To_Virtual_String ("ada");
    end Request_Id_Prefix;
 
    ---------------------
@@ -1342,9 +1341,10 @@ package body GPS.LSP_Clients is
 
    function Server_Language
      (Self : LSP_Client) return VSS.Strings.Virtual_String is
+      pragma Unreferenced (Self);
    begin
       return
-        VSS.Strings.Conversions.To_Virtual_String (Self.Language.Get_Name);
+        VSS.Strings.Conversions.To_Virtual_String ("Ada");
    end Server_Language;
 
    -----------------------------------
